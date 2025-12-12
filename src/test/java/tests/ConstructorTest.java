@@ -219,7 +219,7 @@ class ConstructorTest {
         // Act - переходим на Соусы
         mainPage.clickSaucesTab();
         try {
-            Thread.sleep(800);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
         }
 
@@ -229,7 +229,7 @@ class ConstructorTest {
         // Act - переходим на Начинки
         mainPage.clickFillingsTab();
         try {
-            Thread.sleep(800);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
         }
 
@@ -263,7 +263,7 @@ class ConstructorTest {
         System.out.println("Шаг 1: Булки → Соусы");
         mainPage.clickSaucesTab();
         try {
-            Thread.sleep(800);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
         }
 
