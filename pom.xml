@@ -89,6 +89,12 @@
             <version>${aspectj.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version> <!-- Укажите актуальную версию -->
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

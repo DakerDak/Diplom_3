@@ -38,17 +38,15 @@ public class WebDriverFactory {
     }
 
     private static ChromeDriver createYandexDriver() {
+        // Помещаем yandexdriver.exe в корень проекта и используем относительный путь
+        String yandexDriverPath = "yandexdriver.exe";
 
-        System.setProperty("webdriver.chrome.driver",
-                "C:\\Users\\paskal.nk\\Diplom\\Diplom_3\\yandexdriver.exe");
+        System.setProperty("webdriver.chrome.driver", yandexDriverPath);
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--start-maximized");
         options.addArguments("--disable-notifications");
-
-        String yandexPath = "C:\\Users\\paskal.nk\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe";
-        options.setBinary(yandexPath);
 
         System.out.println("Запускаем Яндекс через YandexDriver");
         return new ChromeDriver(options);

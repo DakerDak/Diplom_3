@@ -26,6 +26,8 @@ public class LogoutTest {
     @BeforeEach
     @DisplayName("Настройка WebDriver и страниц")
     void setUpWebDriver() {
+
+        System.setProperty("browser", "yandex");
         driver = BrowserManager.getDriver();
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);

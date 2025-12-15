@@ -6,9 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 import pages.MainPage;
 import utils.BrowserManager;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,15 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConstructorTest {
     private WebDriver driver;
     private MainPage mainPage;
+    private WebDriverWait wait;
 
     @BeforeEach
     @DisplayName("Настройка тестового окружения")
     void setUp() {
-
         driver = BrowserManager.getDriver();
-
         mainPage = new MainPage(driver);
-
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Test
@@ -36,20 +36,14 @@ class ConstructorTest {
 
         // Act - переходим на Соусы
         mainPage.clickSaucesTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isSaucesActive());
 
         // Проверяем, что Соусы активны
         assertTrue(mainPage.isSaucesActive(), "Соусы должны быть активны");
 
         // Act - переходим обратно на Булки
         mainPage.clickBunsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isBunsActive());
 
         // Assert - проверяем состояние
         assertAll("Проверка возврата к Букам",
@@ -72,20 +66,14 @@ class ConstructorTest {
 
         // Act - переходим на Начинки
         mainPage.clickFillingsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isFillingsActive());
 
         // Проверяем, что Начинки активны
         assertTrue(mainPage.isFillingsActive(), "Начинки должны быть активны");
 
         // Act - переходим обратно на Булки
         mainPage.clickBunsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isBunsActive());
 
         // Assert - проверяем состояние
         assertAll("Проверка возврата к Букам",
@@ -98,7 +86,6 @@ class ConstructorTest {
         System.out.println("✓ Успешный переход к Букам после Начинок");
     }
 
-
     @Test
     @DisplayName("Переход к Соусам после Булок с проверкой контента")
     @Description("Тест проверяет переход к Соусам после Булок и отображение контента")
@@ -110,19 +97,13 @@ class ConstructorTest {
         // Убеждаемся, что Булки активны
         if (!mainPage.isBunsActive()) {
             mainPage.clickBunsTab();
-            try {
-                Thread.sleep(800);
-            } catch (InterruptedException e) {
-            }
+            wait.until(driver -> mainPage.isBunsActive());
         }
         assertTrue(mainPage.isBunsActive(), "Булки должны быть активны");
 
         // Act - переходим на Соусы
         mainPage.clickSaucesTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isSaucesActive());
 
         // Assert - проверяем состояние
         assertAll("Проверка перехода к Соусам",
@@ -145,20 +126,14 @@ class ConstructorTest {
 
         // Act - переходим на Начинки
         mainPage.clickFillingsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isFillingsActive());
 
         // Проверяем, что Начинки активны
         assertTrue(mainPage.isFillingsActive(), "Начинки должны быть активны");
 
         // Act - переходим на Соусы
         mainPage.clickSaucesTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isSaucesActive());
 
         // Assert - проверяем состояние
         assertAll("Проверка перехода к Соусам",
@@ -171,7 +146,6 @@ class ConstructorTest {
         System.out.println("✓ Успешный переход к Соусам после Начинок");
     }
 
-
     @Test
     @DisplayName("Переход к Начинкам после Булок с проверкой контента")
     @Description("Тест проверяет переход к Начинкам после Булок и отображение контента")
@@ -183,19 +157,13 @@ class ConstructorTest {
         // Убеждаемся, что Булки активны
         if (!mainPage.isBunsActive()) {
             mainPage.clickBunsTab();
-            try {
-                Thread.sleep(800);
-            } catch (InterruptedException e) {
-            }
+            wait.until(driver -> mainPage.isBunsActive());
         }
         assertTrue(mainPage.isBunsActive(), "Булки должны быть активны");
 
         // Act - переходим на Начинки
         mainPage.clickFillingsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isFillingsActive());
 
         // Assert - проверяем состояние
         assertAll("Проверка перехода к Начинкам",
@@ -218,20 +186,14 @@ class ConstructorTest {
 
         // Act - переходим на Соусы
         mainPage.clickSaucesTab();
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isSaucesActive());
 
         // Проверяем, что Соусы активны
         assertTrue(mainPage.isSaucesActive(), "Соусы должны быть активны");
 
         // Act - переходим на Начинки
         mainPage.clickFillingsTab();
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isFillingsActive());
 
         // Assert - проверяем состояние
         assertAll("Проверка перехода к Начинкам",
@@ -243,7 +205,6 @@ class ConstructorTest {
 
         System.out.println("✓ Успешный переход к Начинкам после Соусов");
     }
-
 
     @Test
     @DisplayName("Циклическое переключение всех табов с проверкой контента")
@@ -262,10 +223,7 @@ class ConstructorTest {
         // 2. Булки → Соусы
         System.out.println("Шаг 1: Булки → Соусы");
         mainPage.clickSaucesTab();
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isSaucesActive());
 
         assertAll("Проверка перехода к Соусам",
                 () -> assertTrue(mainPage.isSaucesActive(), "Соусы должны быть активны"),
@@ -275,10 +233,7 @@ class ConstructorTest {
         // 3. Соусы → Начинки
         System.out.println("Шаг 2: Соусы → Начинки");
         mainPage.clickFillingsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isFillingsActive());
 
         assertAll("Проверка перехода к Начинкам",
                 () -> assertTrue(mainPage.isFillingsActive(), "Начинки должны быть активны"),
@@ -288,10 +243,7 @@ class ConstructorTest {
         // 4. Начинки → Булки
         System.out.println("Шаг 3: Начинки → Булки");
         mainPage.clickBunsTab();
-        try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-        }
+        wait.until(driver -> mainPage.isBunsActive());
 
         assertAll("Проверка возврата к Букам",
                 () -> assertTrue(mainPage.isBunsActive(), "Булки должны быть активны"),
@@ -301,15 +253,12 @@ class ConstructorTest {
         System.out.println("✓ Циклическое переключение выполнено успешно");
     }
 
-
     @AfterEach
     @DisplayName("Завершение теста")
     void tearDown() {
-
         if (driver != null) {
             driver.quit();
             System.out.println("Драйвер закрыт");
         }
-
     }
 }
